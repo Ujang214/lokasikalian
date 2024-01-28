@@ -1,0 +1,84 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-image: url('/static/images/bg.jpg'); /* Ganti dengan path gambar yang sesuai */
+    background-size: cover;
+    background-position: center;
+    color: white; /* Sesuaikan dengan warna teks yang cocok dengan background */
+    margin: 0; /* Menghilangkan margin default pada body */
+    padding: 0; /* Menghilangkan padding default pada body */
+}
+
+.login-container {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 50px auto;
+    width: 300px;
+    text-align: center;
+}
+
+.login-container h2 {
+    color: white;
+}
+
+.login-container label {
+    display: block;
+    margin-top: 10px;
+}
+
+.login-container select,
+.login-container input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 8px;
+    box-sizing: border-box;
+}
+
+.login-container button {
+    background-color: #28a745;
+    margin-top: 8px;
+    color: #ffffff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.login-container button:hover {
+    background-color: #218838;
+}
+
+.login-container .error {
+    color: #dc3545;
+}
+
+.navbar {
+    background-color: #007bff;
+    color: #ffffff;
+}
+
+.container {
+    
+    margin-top: 20px;
+}
+
+.container h2 {
+    color: #007bff;
+}
+
+.container p {
+    color: #ffffff;
+}
+
+.col-lg-6 {
+    
+    margin-top: 10px;
+}
+
+.col-lg-6 .card {
+    border-color: white;
+    color : white;
+    background-color: rgba(0, 0, 0, 0.5);
+}

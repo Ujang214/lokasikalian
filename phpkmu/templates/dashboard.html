@@ -1,0 +1,79 @@
+{% extends 'layout.html' %}
+
+{% block title %}Dashboard - My App{% endblock %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">User Information</h5>
+          <p class="card-text">Welcome, {{ username }}!</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Last Location</h5>
+          <p class="card-text" id="location-details">Fetching location...</p>
+          <p class="card-text" id="timestamp">Last Updated: {{ timestamp }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Mengambil lokasi pengguna secara otomatis
+    function getLocation() {
+      if (navigator.geolocation) {
+        const options = {
+          enableHighAccuracy: true,
+          maximumAge: 30000, // Cache lokasi selama 30 detik
+          timeout: 5000      // Batas waktu mencari lokasi (5 detik)
+        };
+
+        navigator.geolocation.getCurrentPosition(showPosition, handleError, options);
+      } else {
+        document.getElementById("location-details").innerHTML = "Geolocation is not supported by this browser.";
+      }
+    }
+
+    // Menampilkan lokasi pengguna
+    function showPosition(position) {
+      const latitude = position.coords.latitude;
+      const longitude = position.coords.longitude;
+
+      // Membuat tautan ke Google Maps dengan koordinat
+      const mapLink = `https://maps.google.com/?q=${latitude},${longitude}`;
+      
+      // Menampilkan tautan dan timestamp sebagai HTML
+      const locationDetails = `Location: <a href="${mapLink}" target="_blank">Open in Maps</a>`;
+      const timestampInfo = `Last Updated: ${new Date().toLocaleString()}`;
+      
+      document.getElementById("location-details").innerHTML = locationDetails;
+      document.getElementById("timestamp").innerHTML = timestampInfo;
+    }
+
+    // Menangani kesalahan jika tidak dapat mendapatkan lokasi
+    function handleError(error) {
+      switch (error.code) {
+        case error.PERMISSION_DENIED:
+          document.getElementById("location-details").innerHTML = "User denied the request for Geolocation.";
+          break;
+        case error.POSITION_UNAVAILABLE:
+          document.getElementById("location-details").innerHTML = "Location information is unavailable.";
+          break;
+        case error.TIMEOUT:
+          document.getElementById("location-details").innerHTML = "The request to get user location timed out.";
+          break;
+        case error.UNKNOWN_ERROR:
+          document.getElementById("location-details").innerHTML = "An unknown error occurred.";
+          break;
+      }
+    }
+
+    // Memanggil fungsi getLocation saat halaman dimuat
+    document.addEventListener("DOMContentLoaded", getLocation);
+  </script>
+{% endblock %}
